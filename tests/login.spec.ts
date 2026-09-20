@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
+import { LoginPage } from "../pages/login-page";
 
 test("successful login - verify products page displays", async ({ page }) => {
-  await page.goto("https://saucedemo.com/");
-  await page.getByRole("textbox", { name: "Username" }).fill("standard_user");
-  await page.getByRole("textbox", { name: "Password" }).fill("secret_sauce");
-  await page.getByRole("button", { name: "Login" }).click();
+  const loginPage = new LoginPage(page);
+  await loginPage.gotoPage();
+  await loginPage.userLogin("standard_user", "secret_sauce");
 
   await expect(page).toHaveURL(/saucedemo\.com\/inventory\.html/);
   await expect(page.getByTestId("title")).toHaveText("Products");
@@ -13,10 +13,10 @@ test("successful login - verify products page displays", async ({ page }) => {
 test("locked-out user sees a lockout error and stays on the login page", async ({
   page,
 }) => {
-  await page.goto("https://saucedemo.com/");
-  await page.getByRole("textbox", { name: "Username" }).fill("locked_out_user");
-  await page.getByRole("textbox", { name: "Password" }).fill("secret_sauce");
-  await page.getByRole("button", { name: "Login" }).click();
+  const loginPage = new LoginPage(page);
+
+  await loginPage.gotoPage();
+  await loginPage.userLogin("locked_out_user", "secret_sauce");
 
   await expect(page).toHaveURL("https://www.saucedemo.com/");
   await expect(page.getByRole("alert")).toHaveText(
