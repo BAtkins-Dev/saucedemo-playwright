@@ -14,12 +14,12 @@ export class LoginPage {
   }
 
   async gotoPage() {
-    await this.page.goto("https://www.saucedemo.com/");
+    await this.page.goto("");
   }
 
-  async userLogin(usernamePassed: string, passwordPassed: string) {
-    await this.username.fill(usernamePassed);
-    await this.password.fill(passwordPassed);
+  async userLogin(username: string, password: string) {
+    await this.username.fill(username);
+    await this.password.fill(password);
     await this.loginButton.click();
   }
 }
