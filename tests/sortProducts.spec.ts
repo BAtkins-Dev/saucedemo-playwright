@@ -4,7 +4,7 @@ test.use({ storageState: "playwright/.auth/user.json" });
 test("sort products in reverse-alphabetical order from Z to A", async ({
   page,
 }) => {
-  await page.goto("https://www.saucedemo.com/inventory.html");
+  await page.goto("inventory.html");
   await page.getByTestId("product-sort-container").selectOption("za");
 
   const texts = await page.getByTestId("inventory-item-name").allTextContents();
