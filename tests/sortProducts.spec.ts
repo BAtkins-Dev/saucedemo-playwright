@@ -1,13 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../pages/login-page";
+test.use({ storageState: "playwright/.auth/user.json" });
 
 test("sort products in reverse-alphabetical order from Z to A", async ({
   page,
 }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.gotoPage();
-  await loginPage.userLogin("standard_user", "secret_sauce");
-
+  await page.goto("https://www.saucedemo.com/inventory.html");
   await page.getByTestId("product-sort-container").selectOption("za");
 
   const texts = await page.getByTestId("inventory-item-name").allTextContents();

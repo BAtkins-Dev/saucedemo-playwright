@@ -1,13 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../pages/login-page";
+test.use({ storageState: "playwright/.auth/user.json" });
 
 test("click Add to cart for an item and see that the item is added to the shopping cart", async ({
   page,
 }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.gotoPage();
-  await loginPage.userLogin("standard_user", "secret_sauce");
-
+  await page.goto("https://www.saucedemo.com/inventory.html");
   await page.getByTestId("add-to-cart-sauce-labs-bolt-t-shirt").click();
 
   await expect(page.getByTestId("remove-sauce-labs-bolt-t-shirt")).toHaveText(
@@ -17,9 +14,7 @@ test("click Add to cart for an item and see that the item is added to the shoppi
 });
 
 test("remove an item from the cart - cart is empty", async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.gotoPage();
-  await loginPage.userLogin("standard_user", "secret_sauce");
+  await page.goto("https://www.saucedemo.com/inventory.html");
   await page.getByTestId("add-to-cart-sauce-labs-bolt-t-shirt").click();
 
   await page.getByTestId("remove-sauce-labs-bolt-t-shirt").click();
