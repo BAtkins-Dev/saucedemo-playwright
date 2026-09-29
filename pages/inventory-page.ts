@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { CartPage } from "../pages/cart-page";
 
 export class InventoryPage {
   readonly page: Page;
@@ -31,5 +32,6 @@ export class InventoryPage {
 
   async cartClick() {
     await this.page.getByTestId("shopping-cart-link").click();
+    return new CartPage(this.page);
   }
 }
