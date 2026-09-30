@@ -36,13 +36,26 @@ test.describe("Cart", () => {
     await expect(cartPage.itemDescription).toHaveText(
       "Sauce Labs Bolt T-Shirt",
     );
-
-    test.skip("continue shopping", async ({ page }) => {});
-
-    test.skip("checkout with one item in cart", async ({ page }) => {});
-
-    test.skip("check out with an empty cart - not allowed to complete check out", async ({
-      page,
-    }) => {});
   });
+
+  test("continue shopping", async ({ page }) => {
+    await inventoryPage.addItemToCart("sauce-labs-bolt-t-shirt");
+    await expect(page.getByTestId("shopping-cart-badge")).toHaveText("1");
+    const cartPage = await inventoryPage.cartClick();
+    await cartPage.clickContinueShopping();
+    await expect(page.getByTestId("remove-sauce-labs-bolt-t-shirt")).toHaveText(
+      "Remove",
+    );
+  });
+
+  test.skip("checkout with one item in cart", async ({ page }) => {
+    await inventoryPage.addItemToCart("sauce-labs-bolt-t-shirt");
+    await expect(page.getByTestId("shopping-cart-badge")).toHaveText("1");
+    const cartPage = await inventoryPage.cartClick();
+    await cartPage.clickCheckOut();
+  });
+
+  test.skip("check out with an empty cart - not allowed to complete check out", async ({
+    page,
+  }) => {});
 });
