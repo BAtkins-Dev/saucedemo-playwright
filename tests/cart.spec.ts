@@ -48,7 +48,7 @@ test.describe("Cart", () => {
     );
   });
 
-  test.skip("checkout with one item in cart", async ({ page }) => {
+  test("checkout with one item in cart", async ({ page }) => {
     await inventoryPage.addItemToCart("sauce-labs-bolt-t-shirt");
     await expect(page.getByTestId("shopping-cart-badge")).toHaveText("1");
     const cartPage = await inventoryPage.cartClick();
