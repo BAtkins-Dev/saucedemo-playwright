@@ -1,5 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { CheckoutYourInfoPage } from "./checkout-your-info-page";
+import { InventoryPage } from "./inventory-page";
 
 export class CartPage {
   readonly page: Page;
@@ -20,6 +21,7 @@ export class CartPage {
 
   async clickContinueShopping() {
     await this.continueShoppingButton.click();
+    return new InventoryPage(this.page);
   }
 
   async clickCheckOut() {

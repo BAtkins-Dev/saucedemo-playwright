@@ -9,6 +9,7 @@ export class CheckoutYourInfoPage {
   readonly zipcode: Locator;
   readonly cancelButton: Locator;
   readonly continueButton: Locator;
+  readonly errorMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,6 +19,7 @@ export class CheckoutYourInfoPage {
     this.zipcode = page.getByTestId("postalCode");
     this.cancelButton = page.getByTestId("cancel");
     this.continueButton = page.getByTestId("continue");
+    this.errorMessage = page.getByTestId("error");
   }
 
   async startCheckout(firstName: string, lastName: string, zip: string) {

@@ -4,6 +4,7 @@ import { CartPage } from "../pages/cart-page";
 export class InventoryPage {
   readonly page: Page;
   readonly cartBadge: Locator;
+  readonly 
 
   constructor(page: Page) {
     this.page = page;
