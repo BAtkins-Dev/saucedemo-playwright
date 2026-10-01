@@ -18,7 +18,7 @@ test("locked-out user sees a lockout error and stays on the login page", async (
   await loginPage.gotoPage();
   await loginPage.userLogin("locked_out_user", "secret_sauce");
 
-  await expect(page).toHaveURL("https://www.saucedemo.com/");
+  await expect(page).toHaveURL("");
   await expect(page.getByRole("alert")).toHaveText(
     /Sorry, this user has been locked out/,
   );
