@@ -24,10 +24,41 @@ test.describe("Checkout", () => {
       "98115",
     );
     await expect(checkoutOverviewPage.totalPrice).toContainText("17.27");
-
     const checkoutComplete = await checkoutOverviewPage.clickFinish();
     await expect(checkoutComplete.orderCompleteMsg).toHaveText(
       "Thank you for your order!",
     );
+  });
+
+  test("enter personal information, leaving out zip - can't continue checkout", async ({
+    page,
+  }) => {
+    await inventoryPage.addItemToCart("sauce-labs-bolt-t-shirt");
+    const cartPage = await inventoryPage.cartClick();
+    const checkoutYourInfoPage = await cartPage.clickCheckOut();
+    await expect(checkoutYourInfoPage.checkoutYourInfoTitle).toHaveText(
+      "Checkout: Your Information",
+    );
+    await checkoutYourInfoPage.startCheckout("Joe", "Jones", "");
+    await expect(checkoutYourInfoPage.errorMessage).toHaveText(
+      "Error: Postal Code is required",
+    );
+  });
+
+  //Defect: This test is expected to fail because checkout button is enabled for an empty cart.
+  test.fail(
+    "start checking out with an empty cart - not allowed to start check out",
+    async ({ page }) => {
+      const cartPage = await inventoryPage.cartClick();
+      await expect(cartPage.checkoutButton).toBeDisabled();
+    },
+  );
+
+  test("view cart and continue shopping", async ({ page }) => {
+    await inventoryPage.addItemToCart("sauce-labs-bolt-t-shirt");
+    const cartPage = await inventoryPage.cartClick();
+    await expect(
+      inventoryPage.getRemoveFromCartButton("sauce-labs-bolt-t-shirt"),
+    ).toBeVisible();
   });
 });
