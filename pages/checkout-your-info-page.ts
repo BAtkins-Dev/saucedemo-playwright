@@ -29,4 +29,15 @@ export class CheckoutYourInfoPage {
     await this.continueButton.click();
     return new CheckoutOverview(this.page);
   }
+
+//   async startCheckoutValidation(
+//     firstName: string,
+//     lastName: string,
+//     zip: string
+//   ) {
+//     await this.firstName.fill(firstName);
+//     await this.lastName.fill(lastName);
+//     await this.zipcode.fill(zip);
+//     await this.continueButton.click();
+//   }
 }

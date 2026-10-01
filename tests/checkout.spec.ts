@@ -57,8 +57,7 @@ test.describe("Checkout", () => {
   test("view cart and continue shopping", async ({ page }) => {
     await inventoryPage.addItemToCart("sauce-labs-bolt-t-shirt");
     const cartPage = await inventoryPage.cartClick();
-    await expect(
-      inventoryPage.getRemoveFromCartButton("sauce-labs-bolt-t-shirt"),
-    ).toBeVisible();
+    await cartPage.clickContinueShopping();
+    await expect(page).toHaveURL(/inventory\.html/);
   });
 });

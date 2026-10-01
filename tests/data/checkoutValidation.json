@@ -1,0 +1,23 @@
+[
+  {
+    "testName": "Missing first name",
+    "firstName": "",
+    "lastName": "Doe",
+    "zip": "98888",
+    "errorMessage": "Error: First Name is required"
+  },
+  {
+    "testName": "Missing last name",
+    "firstName": "John",
+    "lastName": "",
+    "zip": "98888",
+    "errorMessage": "Error: Last Name is required"
+  },
+  {
+    "testName": "Missing zip",
+    "firstName": "John",
+    "lastName": "Doe",
+    "zip": "",
+    "errorMessage": "Error: Postal Code is required"
+  }
+]
