@@ -1,9 +1,12 @@
 {
   "name": "saucedemo-playwright",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
+  "description": "Playwright/TypeScript test automation suite for Sauce Demo, with Page Object Model, GitHub Actions CI, and data-driven testing",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
